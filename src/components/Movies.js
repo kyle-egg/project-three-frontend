@@ -28,8 +28,6 @@ const genreOptions = [
  
  
 function Movies() {
-  // const isLoading = !movies
-  // const [marathons, setMarathons] = React.useState(null)
   const [movies, setMovies] = React.useState(null)
   const [genreValue, setGenreValue] = React.useState(null)
   const [runTimeValue, setRunTimeValue] = React.useState(null)
@@ -40,16 +38,6 @@ function Movies() {
   
   })
  
-  // React.useEffect(() => {
-  //   const getMarathons = async () => {
-  //     const res = await axios.get('/api/marathons')
-  //     const movies = res.marathons
-  //     setMarathons(res.data)
-  //   }
-  //   getMarathons()
-  // console.log(marathons)
-  // }, [ ])
- 
   React.useEffect(() => {
     const getData = async () => {
       const res = await axios.get('/api/movies')
@@ -58,6 +46,7 @@ function Movies() {
     getData()
  
   }, [ ])
+
   const handleGenreChange = (selected, name) => {
     const selectedGenres = selected ? selected.map(item => item.value) : []
     setFormData({ ...formData, [name]: selectedGenres })
@@ -69,6 +58,7 @@ function Movies() {
     setFormData({ ...formData, [event.target.name]: bingeTime })
     setRunTimeValue(bingeTime)
   }
+  
   const filterGenresOne = () => {
     if (genreValue) {
       return movies.filter(movie => {
@@ -146,8 +136,6 @@ function Movies() {
               <div 
                 className="genre-filters posters movie uk-grid uk-grid-medium" key={movie._id} {...movie}>
                 <div className="movie-cards">
-                  {/* <h2 className="title">{movie.title}</h2> */}
-                  {/* <p>:star:{movie.imdbrating}</p> */}
                   <img className="showing" src={movie.poster}/>
                   <div className="hiding uk-button-group">
                     <Link to={`/movies/${movie._id}`} key={movie._id}>
@@ -167,8 +155,6 @@ function Movies() {
                   <div 
                     className="genre-filters posters movie uk-grid uk-grid-medium" key={movie._id} {...movie}>
                     <div className="movie-cards">
-                      {/* <h2 className="title">{movie.title}</h2> */}
-                      {/* <p>:star:{movie.imdbrating}</p> */}
                       <img className="showing" src={movie.poster}/>
                       <div className="hiding uk-button-group">
                         <Link to={`/movies/${movie._id}`} key={movie._id}>
@@ -189,8 +175,6 @@ function Movies() {
                 <div 
                   className="genre-filters posters movie uk-grid uk-grid-medium" key={movie._id} {...movie}>
                   <div className="movie-cards">
-                    {/* <h2 className="title">{movie.title}</h2> */}
-                    {/* <p>:star:{movie.imdbrating}</p> */}
                     <img className="showing" src={movie.poster}/>
                     <div className="hiding uk-button-group">
                       <Link to={`/movies/${movie._id}`} key={movie._id}>
@@ -205,13 +189,6 @@ function Movies() {
               </>
             )}
           </div>
-          {/* <div className="movies">
-            <h2>This is Movie Index</h2>
-            {/* {data && data.map(movie => (
-          <div className="card" key={movie.name}>
-          </div>
-        ))} */}
-          {/* </div> */}
         </div>
       </div>
     </div>

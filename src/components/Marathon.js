@@ -27,8 +27,8 @@ const genreOptions = [
 ]
  
 export const titleSelection = []
-export const runtimeSelection = []
 export const posterSelection = []
+export const marathonSelection = []
  
 function Marathon() {
   const history = useHistory()
@@ -84,23 +84,24 @@ function Marathon() {
   
   const addMovieToMarathon = (e) => {
     if (titleSelection.includes(e.target.id) &&
-      (titleSelection.includes(e.target.id)) && 
-      (posterSelection.includes(e.target.value))) {
+      (posterSelection.includes(e.target.value)) &&
+      (marathonSelection.includes(e.target.id || e.target.value))) {
       const titleIndex = titleSelection.indexOf(e.target.id)
-      const posterIndex = titleSelection.indexOf(e.target.value)
+      const posterIndex = posterSelection.indexOf(e.target.value)
+      const marathonIndex = marathonSelection.indexOf(e.target.value)
       titleSelection.splice(titleIndex, 1)
       posterSelection.splice(posterIndex, 1)
-      console.log('removed', titleSelection, posterSelection)
-      e.target.textContent = 'Add To Marathon'
+      marathonSelection.splice(marathonIndex, 2)
+      e.target.textContent = 'Add'
     } else {
       titleSelection.push(e.target.id) 
       posterSelection.push(e.target.value)
-       
-      console.log('added', titleSelection, runtimeSelection, posterSelection)
+      marathonSelection.push(e.target.value)
+      marathonSelection.push(e.target.id)
       e.target.textContent = 'ADDED!'
     }
-    // marathonOfMovies.push(e.target.className)
   }  
+
   return (
     <div className="main uk-section uk-height-viewport uk-background-cover">
       <div className="uk-container uk-column-1-1 uk-height-1-1">

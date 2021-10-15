@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { getToken } from './auth.js'
+import { baseUrl } from '../../config.js'
 
-const baseUrl = '/api'
+// const baseUrl = '/api'
 
 export function headers() {
   return {

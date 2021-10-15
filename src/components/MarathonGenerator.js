@@ -1,36 +1,26 @@
-import { titleSelection, posterSelection } from './Marathon.js'
+import { posterSelection, marathonSelection } from './Marathon.js'
 import React from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
 
 function MarathonGenerator() {
-  const [playlistData, setPlaylistData] = React.useState(titleSelection)
-  // const [newFilm, setNewFilm] = React.useState('')
+  const [playlistData, setPlaylistData] = React.useState(marathonSelection)
   const history = useHistory()
- 
   
   const handleChange = e => {
-    // console.log(playlistData.name)
-    console.log('value', playlistData)
-
     setPlaylistData({ ...playlistData, [e.target.name]: e.target.value })
-    // setPlaylistData([ ...playlistData ])
-    console.log('here 18', playlistData)
+    console.log(playlistData)
   } 
 
-  // const handleFilm = e => {
-  //   setNewFilm({ ...newFilm, [e.target.name]: e.target.value })
-  //   console.log(e.target.name)
-  // } 
 
   const handleSubmit = async e => {
     e.preventDefault()
     console.log(playlistData)
     try {
       const { data } = await axios.post('/api/marathons', playlistData)
-      console.log(titleSelection)
-      history.push('/marathons')
+      console.log('submitted', playlistData)
+      history.push(`/marathons/${data._id}`)
       console.log(data)
     } catch (err) {
       console.log(err)
@@ -62,15 +52,15 @@ function MarathonGenerator() {
                 onSubmit={handleSubmit}>
                     Submit Marathon!
               </button>
-              <div className="field">
+              <div className="field" id="hideme">
                 <label className="label-movies"></label>
-                <div id="hideme" className="control">
+                <div className="control">
                   <input
                     className="uk-input"
-                    placeholder=""
+                    placeholder="Title"
                     name="title"
                     onChange={handleChange}
-                    value={titleSelection}
+                    value={marathonSelection}
                   />
                 </div>
               </div>
